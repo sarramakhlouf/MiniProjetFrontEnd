@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <label>Domaines</label>
+        <select class="form-control form-control-lg" id="idDom" name="idDom" [(ngModel)]="IdDomaine"
+            (change)="onChange()">
+            <option *ngFor="let Dom of domaines" value="{{Dom.idDom}}">
+                {{Dom.nomDom}}
+            </option>
+        </select>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Date Création</th>
+                        <th>Nombre des étudiants</th>
+                        <th>Domaines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let universite of universites">
+                        <td>{{universite.idUni}}</td>
+                        <td>{{universite.nomUni}}</td>
+                        <td>{{universite.adresseUni}}</td>
+                        <td>{{universite.dateCreation | date :'dd/MM/yyyy'}}</td>
+                        <td>{{universite.numberEtudiants}}</td>
+                        <td>{{universite.domaine.nomDom}}</td>
+                        <!--<td><a class="btn btn-danger" (click)="supprimeruniversite(universite)">Supprimer</a></td>-->
+                        <td><a *ngIf="authService.isloggedIn" class="btn btn-success" [routerLink]="['/updateuniversite',universite.idUni]">Modifier</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

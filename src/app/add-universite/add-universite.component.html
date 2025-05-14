@@ -1,0 +1,68 @@
+<div class="container">
+    <div>
+        <h2>Ajouter une université :</h2>
+    </div>
+    <form (ngSubmit)="addUniversity()" #universityForm="ngForm">
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>ID Université</label>
+                <!--<input type="text" [(ngModel)]="newUni.idUni" name="idUni" class="form-control" #idUni="ngModel" >
+                <div *ngIf="idUni.invalid && idUni.touched">
+                    <small class="text-danger" >L'id est requis.</small>
+                </div>-->
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Nom Université</label>
+                <input type="text" [(ngModel)]="newUni.nomUni" name="nomUni" class="form-control" #nomUni="ngModel" required>
+                <div *ngIf="nomUni.invalid && nomUni.touched">
+                    <small class="text-danger" *ngIf="nomUni.errors?.['required']">Le nom est requis.</small>
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Adresse Université</label>
+                <input type="text" [(ngModel)]="newUni.adresseUni" name="adresseUni" class="form-control"  #adresseUni="ngModel" required>
+                <div *ngIf="adresseUni.invalid && adresseUni.touched">
+                    <small class="text-danger" *ngIf="adresseUni.errors?.['required']">L'adresse est requise.</small>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Date création</label>
+                <input type="date" [(ngModel)]="newUni.dateCreation" name="dateCreation" class="form-control" #dateCreation="ngModel" required>
+                <div *ngIf="dateCreation.invalid && dateCreation.touched">
+                    <small class="text-danger" *ngIf="dateCreation.errors?.['required']">La date est requise.</small>
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Nombre des étudiants</label>
+                <input type="number" [(ngModel)]="newUni.numberEtudiants" name="numberEtudiants" class="form-control" #numberEtudiants="ngModel" min=1000 max=10000 required>
+                <div *ngIf="numberEtudiants.invalid && numberEtudiants.touched">
+                    <small class="text-danger" *ngIf="numberEtudiants.errors?.['max']">le nombre des étudiants est trop élevé.</small>
+                    <small class="text-danger" *ngIf="numberEtudiants.errors?.['min']">le nombre des étudiants est très faible.</small>
+                    <small class="text-danger" *ngIf="numberEtudiants.errors?.['required']">Le nombre des étudiants est requis.</small>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Domaines</label>
+                <select class="form-control form-control-lg" id="idDom" name="idDom" [(ngModel)]="newIdDom" #idDom="ngModel" required>
+                    <option *ngFor="let Dom of domaines" [value]="Dom.idDom">{{Dom.nomDom}}</option>
+                </select>
+                <div *ngIf="idDom.invalid && idDom.touched">
+                    <small class="text-danger" *ngIf="idDom.errors?.['required']">Le demaine est requis.</small>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Email</label>
+                <input type="email" [(ngModel)]="newUni.email" name="email" class="form-control" required email minlength="5" #email="ngModel" pattern="[a-z0-9._%+-]+@gmail.com">
+                <!-- Message d'erreur si l'email n'est pas valide -->
+                <div *ngIf="email.invalid && email.touched">
+                    <small class="text-danger" *ngIf="email.errors?.['required']">L'email est requis.</small>
+                    <small class="text-danger" *ngIf="email.errors?.['pattern']">Format d'email invalide.</small>
+                    <small class="text-danger" *ngIf="email.errors?.['minlength']">L'email doit contenir au moins 5 caractères.</small>
+                </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <button type="submit" class="btn btn-success" [disabled]="universityForm.invalid">Ajouter</button>
+        </div>   
+    </form>
+</div>
