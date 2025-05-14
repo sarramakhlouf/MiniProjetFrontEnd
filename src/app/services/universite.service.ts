@@ -77,6 +77,7 @@ export class UniversiteService {
     const url = `${this.apiURL}/${dom.idDom}`; // Assurez-vous que `id` est une propriété existante
     return this.http.put<void>(url, dom);
   }
+  
   trierUidUni() {
     this.universities = this.universities.sort((n1, n2) => {
       if (n1.idUni! > n2.idUni!) {

@@ -12,6 +12,7 @@ export class AuthService {
   /*users: User[] = [{ "username": "admin", "password": "123", "roles": ['ADMIN'] },
   { "username": "sarra", "password": "123", "roles": ['USER'] }];*/
   private helper = new JwtHelperService();
+  public regitredUser: User = new User();
   public loggedUser!: string;
   public isloggedIn: Boolean = false;
   public roles!: string[];
@@ -50,7 +51,7 @@ export class AuthService {
   logout() {
     this.loggedUser = undefined!;
     this.roles = undefined!;
-    this.token= undefined!;
+    this.token = undefined!;
     this.isloggedIn = false;
     localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
@@ -83,8 +84,24 @@ export class AuthService {
     // this.getUserRoles(login);
   }
 
-  isTokenExpired(): Boolean{
-    return this.helper.isTokenExpired(this.token); 
+  isTokenExpired(): Boolean {
+    return this.helper.isTokenExpired(this.token);
+  }
+
+  registerUser(user: User) {
+    return this.http.post<User>(this.apiURL + '/register', user, { observe: 'response' });
+  }
+
+  setRegistredUser(user: User) {
+    this.regitredUser = user;
+  }
+
+  getRegistredUser() {
+    return this.regitredUser;
+  }
+
+  validateEmail(code: string) {
+    return this.http.get<User>(this.apiURL + '/verifyEmail/' + code);
   }
 
 

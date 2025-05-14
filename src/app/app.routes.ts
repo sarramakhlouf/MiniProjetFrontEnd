@@ -7,6 +7,8 @@ import { UniversitesComponent } from './universites/universites.component';
 import { AddUniversiteComponent } from './add-universite/add-universite.component';
 import { UpdateUniversiteComponent } from './update-universite/update-universite.component';
 import { universiteGuard } from './universite.guard';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
 
 export const routes: Routes = [
   { path: 'universities', component: UniversitesComponent },
@@ -21,4 +23,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'app-forbidden', component: ForbiddenComponent },
   { path: 'listerDomaines', component: ListerDomainesComponent },
+  {path:'register',component:RegisterComponent},
+  { path: 'verifEmail', component: VerifEmailComponent},
 ];
