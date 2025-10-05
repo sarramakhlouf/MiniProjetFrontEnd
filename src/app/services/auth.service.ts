@@ -19,12 +19,17 @@ export class AuthService {
   apiURL: string = 'http://localhost:8081/users';
   token!: string;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
+  }
 
   login(user: User) {
     return this.http.post<User>(this.apiURL + '/login', user, { observe: 'response' });
   }
   saveToken(jwt: string) {
+    console.log("Token reçu :", jwt);
+    if (jwt.startsWith('Bearer ')) {
+      jwt = jwt.slice(7);
+    }
     localStorage.setItem('jwt', jwt);
     this.token = jwt;
     this.isloggedIn = true;
@@ -45,6 +50,7 @@ export class AuthService {
   }
 
   getToken(): string {
+    console.log("Token récupéré :", this.token);
     return this.token;
   }
 
@@ -112,5 +118,14 @@ export class AuthService {
       }
     });
   }*/
+
+  // auth.service.ts
+  sendEmail(to: string, subject: string, body: string) {
+    return this.http.post(`${this.apiURL}/send-email`,
+      { to, subject, body },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
 
 }

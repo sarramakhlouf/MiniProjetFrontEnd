@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.loadToken();
+    console.log("Token chargé :", this.authService.getToken());
+    console.log("Token expiré ?", this.authService.isTokenExpired());
     if (this.authService.getToken() && !this.authService.isTokenExpired()) {
       this.authService.isloggedIn = true;
       this.authService.decodeJWT(); 
